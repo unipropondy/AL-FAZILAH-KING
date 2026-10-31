@@ -57,6 +57,7 @@ export const FORM_CODES = {
   HELD_ORDERS:  "OPROLS",  // Held Orders
   VOID_ORDER:   "VWORDR",  // Void Orders
   DAILY_END:    "OPRDED",  // Daily End
+  SETTLEMENT:   "OPRSET",  // Settlement
 } as const;
 
 export type AuthState = {
@@ -85,6 +86,7 @@ export type AuthState = {
   canAccessHeldOrders: () => boolean;
   canVoidOrder: () => boolean;
   canAccessDayEnd: () => boolean;
+  canAccessSettlement: () => boolean;
   canAccessStoreSettings: () => boolean;
   canAccessReceiptSettings: () => boolean;
   canAccessWaiters: () => boolean;
@@ -154,7 +156,20 @@ export const useAuthStore = create<AuthState>()(
       canAccessKDS:         () => get().can(FORM_CODES.KDS),
       canAccessHeldOrders:  () => get().can(FORM_CODES.HELD_ORDERS),
       canVoidOrder:         () => get().can(FORM_CODES.VOID_ORDER),
-      canAccessDayEnd:      () => get().can(FORM_CODES.DAILY_END),
+      canAccessSettlement: () => {
+        const { user, permissions } = get();
+        const role = (user?.role || "").toUpperCase();
+        if (role === "ADMIN" || role === "MANAGER" || role === "SUPERVISOR" || role === "CASHIER" || role === "OWNER") return true;
+        if (permissions[FORM_CODES.SETTLEMENT]?.canRead === true || permissions[FORM_CODES.DAILY_END]?.canRead === true) return true;
+        return get().can(FORM_CODES.SETTLEMENT) || get().can(FORM_CODES.DAILY_END);
+      },
+      canAccessDayEnd: () => {
+        const { user, permissions } = get();
+        const role = (user?.role || "").toUpperCase();
+        if (role === "ADMIN" || role === "MANAGER" || role === "SUPERVISOR" || role === "CASHIER" || role === "OWNER") return true;
+        if (permissions[FORM_CODES.DAILY_END]?.canRead === true || permissions[FORM_CODES.SETTLEMENT]?.canRead === true) return true;
+        return get().can(FORM_CODES.DAILY_END);
+      },
       canAccessStoreSettings: () => {
         const role = get().user?.role;
         return role === "ADMIN" || role === "MANAGER" || role === "OWNER" || role === "WAITER";

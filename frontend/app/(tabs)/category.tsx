@@ -1837,6 +1837,7 @@ export default function Category() {
   const canAccessLockTables = useAuthStore((s: any) => s.canAccessLockTables);
   const canAccessKDS = useAuthStore((s: any) => s.canAccessKDS);
   const canAccessDayEnd = useAuthStore((s: any) => s.canAccessDayEnd);
+  const canAccessSettlement = useAuthStore((s: any) => s.canAccessSettlement || s.canAccessDayEnd);
   const canAccessStoreSettings = useAuthStore(
     (s: any) => s.canAccessStoreSettings,
   );
@@ -2049,6 +2050,9 @@ export default function Category() {
       const cleanTableId = String(data.tableId || "").replace(/^\{|\}$/g, "").trim().toLowerCase();
       const cleanTableNo = data.tableNo ? String(data.tableNo).trim().toLowerCase() : "";
 
+      // Collect store update to apply AFTER setAllTables to avoid setState-during-render
+      let storeUpdate: (() => void) | null = null;
+
       setAllTables((prev) =>
         prev.map((tbl) => {
           const matchId = tbl.id && String(tbl.id).replace(/^\{|\}$/g, "").trim().toLowerCase() === cleanTableId;
@@ -2058,7 +2062,9 @@ export default function Category() {
             const secStr = getSectionFromDiningSection(rawSec);
             const numStatus = data.status !== undefined ? Number(data.status) : tbl.Status;
             const mappedStatus = (numStatus === 5 ? "LOCKED" : (numStatus === 1 || numStatus === 4) ? "SENT" : numStatus === 2 ? "BILL_REQUESTED" : numStatus === 3 ? "HOLD" : "EMPTY");
-            useTableStatusStore.getState().updateTableStatus(
+
+            // Save for after-render dispatch (never call Zustand set inside a React setState callback)
+            storeUpdate = () => useTableStatusStore.getState().updateTableStatus(
               tbl.id,
               secStr,
               tbl.label,
@@ -2090,6 +2096,9 @@ export default function Category() {
           return tbl;
         })
       );
+
+      // Apply Zustand store update after React has finished its render cycle
+      if (storeUpdate) setTimeout(storeUpdate, 0);
     };
 
     const handleQrPaymentConfirmed = (data: any) => {
@@ -4589,7 +4598,7 @@ export default function Category() {
               )}
 
               {/* 4. Settlement */}
-              {canAccessDayEnd() && (
+              {canAccessSettlement() && (
                 <TouchableOpacity
                   activeOpacity={0.7}
                   style={styles.menuItem}

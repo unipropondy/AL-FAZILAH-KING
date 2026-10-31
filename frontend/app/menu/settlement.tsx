@@ -601,7 +601,18 @@ const pickerStyles = StyleSheet.create({
 
 export default function SettlementScreen() {
   const router = useRouter();
-  const { user, token } = useAuthStore();
+  const { user, token, isWaiter } = useAuthStore();
+
+  useEffect(() => {
+    if (isWaiter && isWaiter()) {
+      showToast({
+        type: "warning",
+        message: "Access Denied",
+        subtitle: "Waiters are not authorized to access Settlement.",
+      });
+      router.replace("/(tabs)/category");
+    }
+  }, []);
   const { width } = useWindowDimensions();
   const isTablet = width >= 768;
   const enableCashDrawer = useGeneralSettingsStore(
@@ -2326,7 +2337,7 @@ export default function SettlementScreen() {
         );
       }
       text += "[C]========================================\n";
-      text += "[C]SMART-CAFE BY UNIPROSG\n";
+      text += "[C]AL-FAZILAH KING BY UNIPROSG\n";
       text += "[C]========================================\n\n\n\n";
 
       if (Platform.OS === "web") {

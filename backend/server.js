@@ -75,6 +75,7 @@ const io = new Server(httpServer, {
     methods: ["GET", "POST"],
   },
   perMessageDeflate: true,
+  maxHttpBufferSize: 1e8,
 });
 
 const PORT = process.env.PORT || 3000;

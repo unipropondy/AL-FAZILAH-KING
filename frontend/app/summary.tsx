@@ -2909,21 +2909,25 @@ export default function SummaryScreen() {
                       setShowServerModal(true);
                       return;
                     }
-                    if (isWaiter()) {
-                      router.replace("/(tabs)/category");
+                    const userRole = (user?.role || "").toUpperCase();
+                    const isStaffWaiter = isWaiter() && userRole !== "ADMIN" && userRole !== "MANAGER";
+                    if (isStaffWaiter) {
+                      showToast({
+                        type: "warning",
+                        message: "Access Denied",
+                        subtitle: "Waiters are not authorized to process payments.",
+                      });
                       return;
                     }
-                    const canPay = permissions["OPRSET"]?.canAdd;
+                    const isAdminOrCashier = !userRole || userRole === "ADMIN" || userRole === "MANAGER" || userRole === "SUPERVISOR" || userRole === "CASHIER";
+                    const hasExplicitDenial = permissions && permissions["OPRSET"] && permissions["OPRSET"].canAdd === false;
+                    const canPay = isAdminOrCashier || !hasExplicitDenial || permissions?.["OPRSET"]?.canAdd === true;
                     if (!canPay) {
-                      if (Platform.OS === 'web') {
-                        router.replace("/(tabs)/category");
-                      } else {
-                        Alert.alert(
-                          "Access Denied",
-                          "You are not authorized to process payments.",
-                          [{ text: "OK", onPress: () => router.replace("/(tabs)/category") }]
-                        );
-                      }
+                      showToast({
+                        type: "error",
+                        message: "Access Denied",
+                        subtitle: "You are not authorized to process payments.",
+                      });
                       return;
                     }
                     router.push({
@@ -4045,22 +4049,26 @@ export default function SummaryScreen() {
                     extraSplitItems.length === 0
                   }
                   onPress={() => {
-                    if (isWaiter()) {
+                    const userRole = (user?.role || "").toUpperCase();
+                    const isStaffWaiter = isWaiter() && userRole !== "ADMIN" && userRole !== "MANAGER";
+                    if (isStaffWaiter) {
                       setShowSplitModal(false);
-                      router.replace("/(tabs)/category");
+                      showToast({
+                        type: "warning",
+                        message: "Access Denied",
+                        subtitle: "Waiters are not authorized to process payments.",
+                      });
                       return;
                     }
-                    const canPay = permissions["OPRSET"]?.canAdd;
+                    const isAdminOrCashier = !userRole || userRole === "ADMIN" || userRole === "MANAGER" || userRole === "SUPERVISOR" || userRole === "CASHIER";
+                    const hasExplicitDenial = permissions && permissions["OPRSET"] && permissions["OPRSET"].canAdd === false;
+                    const canPay = isAdminOrCashier || !hasExplicitDenial || permissions?.["OPRSET"]?.canAdd === true;
                     if (!canPay) {
-                      if (Platform.OS === 'web') {
-                        router.replace("/(tabs)/category");
-                      } else {
-                        Alert.alert(
-                          "Access Denied",
-                          "You are not authorized to process payments.",
-                          [{ text: "OK", onPress: () => router.replace("/(tabs)/category") }]
-                        );
-                      }
+                      showToast({
+                        type: "error",
+                        message: "Access Denied",
+                        subtitle: "You are not authorized to process payments.",
+                      });
                       return;
                     }
                     const selectedItems = splitType === "items"
