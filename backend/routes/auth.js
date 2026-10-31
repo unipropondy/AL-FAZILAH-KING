@@ -36,9 +36,9 @@ async function sendWelcomeEmail({
 
     // Plain text fallback version for email deliverability
     const textContent = `
-Welcome to SITARA'S RESTAURANT, ${name}.
+Welcome to AL-FAZILAH KING, ${name}.
 
-Thank you for registering as a member with SITARA'S RESTAURANT. Your account has been configured.
+Thank you for registering as a member with AL-FAZILAH KING. Your account has been configured.
 
 Your Member Profile:
 Name: ${name}
@@ -46,11 +46,11 @@ Mobile: ${phone}
 Email: ${email}
 ${promoCode ? `Welcome Wallet Credit: Code ${promoCode} (Value: $${promoAmount})` : ""}
 
-Start ordering here: https://smart-cafe.up.railway.app/customer
+Start ordering here: https://al-fazilah-king-production.up.railway.app/customer
 
-SITARA'S RESTAURANT
+AL-FAZILAH KING
 Support: support@unipro.com.sg
-Unsubscribe: https://smart-cafe.up.railway.app/customer/unsubscribe
+Unsubscribe: https://al-fazilah-king-production.up.railway.app/customer/unsubscribe
     `.trim();
 
     const htmlContent = `
@@ -59,7 +59,7 @@ Unsubscribe: https://smart-cafe.up.railway.app/customer/unsubscribe
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Welcome to SITARA'S RESTAURANT</title>
+      <title>Welcome to AL-FAZILAH KING</title>
       <!--[if mso]>
       <noscript>
         <xml>
@@ -104,7 +104,7 @@ Unsubscribe: https://smart-cafe.up.railway.app/customer/unsubscribe
                   <table border="0" cellpadding="0" cellspacing="0" role="presentation">
                     <tr>
                       <td align="center" style="background-color: rgba(255, 255, 255, 0.15); border-radius: 30px; padding: 6px 16px; display: inline-block; margin-bottom: 16px;">
-                        <span style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: bold; color: #FFFFFF; letter-spacing: 1px; text-transform: uppercase;">Welcome to SITARA'S RESTAURANT</span>
+                        <span style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: bold; color: #FFFFFF; letter-spacing: 1px; text-transform: uppercase;">Welcome to AL-FAZILAH KING</span>
                       </td>
                     </tr>
                     <tr>
@@ -129,7 +129,7 @@ Unsubscribe: https://smart-cafe.up.railway.app/customer/unsubscribe
                       <td>
                         <h2 style="margin: 0 0 12px 0; font-family: Arial, Helvetica, sans-serif; font-size: 18px; font-weight: bold; color: #1E293B;">Hi ${name}</h2>
                         <p style="margin: 0 0 24px 0; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #475569; line-height: 1.6;">
-                          Welcome to SITARA'S RESTAURANT! You can now enjoy faster QR ordering, instant digital receipts, exclusive member-only offers, reward points, birthday surprises, cashback, and a seamless dining experience.
+                          Welcome to AL-FAZILAH KING! You can now enjoy faster QR ordering, instant digital receipts, exclusive member-only offers, reward points, birthday surprises, cashback, and a seamless dining experience.
                         </p>
                       </td>
                     </tr>
@@ -310,7 +310,7 @@ Unsubscribe: https://smart-cafe.up.railway.app/customer/unsubscribe
                     <tr>
                       <td align="center">
                         <!--[if mso]>
-                        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://smart-cafe.up.railway.app/customer" style="height:50px;v-text-anchor:middle;width:240px;" arcsize="10%" stroke="f" fillcolor="#FF6A00">
+                        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://al-fazilah-king-production.up.railway.app/customer" style="height:50px;v-text-anchor:middle;width:240px;" arcsize="10%" stroke="f" fillcolor="#FF6A00">
                           <w:anchorlock/>
                           <center>
                             <span style="color:#ffffff;font-family:Arial, sans-serif;font-size:15px;font-weight:bold;">Start Ordering →</span>
@@ -318,7 +318,7 @@ Unsubscribe: https://smart-cafe.up.railway.app/customer/unsubscribe
                         </v:roundrect>
                         <![endif]-->
                         <!--[if !mso]><!-->
-                        <a href="https://smart-cafe.up.railway.app/customer" style="background-color: #FF6A00; color: #FFFFFF; font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: bold; text-decoration: none; padding: 15px 36px; border-radius: 8px; display: inline-block; box-shadow: 0 6px 12px rgba(255, 106, 0, 0.15);">Start Ordering</a>
+                        <a href="https://al-fazilah-king-production.up.railway.app/customer" style="background-color: #FF6A00; color: #FFFFFF; font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: bold; text-decoration: none; padding: 15px 36px; border-radius: 8px; display: inline-block; box-shadow: 0 6px 12px rgba(255, 106, 0, 0.15);">Start Ordering</a>
                         <!--<![endif]-->
                       </td>
                     </tr>
@@ -332,7 +332,7 @@ Unsubscribe: https://smart-cafe.up.railway.app/customer/unsubscribe
                   <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
                     <tr>
                       <td style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: bold; color: #1E293B; padding-bottom: 6px;">
-                        SITARA'S RESTAURANT
+                        AL-FAZILAH KING
                       </td>
                     </tr>
                     <tr>
@@ -342,14 +342,14 @@ Unsubscribe: https://smart-cafe.up.railway.app/customer/unsubscribe
                     </tr>
                     <tr>
                       <td style="font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #94A3B8; padding-bottom: 8px;">
-                        &copy; 2026 SITARA'S RESTAURANT. All rights reserved.
+                        &copy; 2026 AL-FAZILAH KING. All rights reserved.
                       </td>
                     </tr>
                     <tr>
                       <td style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">
-                        <a href="https://smart-cafe.up.railway.app/customer/privacy" style="color: #94A3B8; text-decoration: underline;">Privacy Policy</a>
+                        <a href="https://al-fazilah-king-production.up.railway.app/customer/privacy" style="color: #94A3B8; text-decoration: underline;">Privacy Policy</a>
                         &nbsp;&bull;&nbsp;
-                        <a href="https://smart-cafe.up.railway.app/customer/unsubscribe" style="color: #94A3B8; text-decoration: underline;">Unsubscribe</a>
+                        <a href="https://al-fazilah-king-production.up.railway.app/customer/unsubscribe" style="color: #94A3B8; text-decoration: underline;">Unsubscribe</a>
                       </td>
                     </tr>
                   </table>
@@ -369,9 +369,9 @@ Unsubscribe: https://smart-cafe.up.railway.app/customer/unsubscribe
     `;
 
     await transporter.sendMail({
-      from: `"SITARA'S RESTAURANT" <${from}>`,
+      from: `"AL-FAZILAH KING" <${from}>`,
       to: email,
-      subject: `Welcome to SITARA'S RESTAURANT, ${name}!`,
+      subject: `Welcome to AL-FAZILAH KING, ${name}!`,
       text: textContent,
       html: htmlContent,
     });

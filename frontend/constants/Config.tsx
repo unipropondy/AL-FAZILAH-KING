@@ -23,7 +23,7 @@ export const API_URL = __DEV__
   : (process.env.EXPO_PUBLIC_API_URL ??
     (Platform.OS === "web" && typeof window !== "undefined"
       ? `${window.location.protocol}//${window.location.hostname}${window.location.port ? `:${window.location.port}` : ""}`
-      : "https://smart-cafe.up.railway.app"));
+      : "https://al-fazilah-king-production.up.railway.app"));
 
 if (__DEV__) {
   console.log(`🌐 [Config] API_URL: ${API_URL} | Platform: ${Platform.OS}`);

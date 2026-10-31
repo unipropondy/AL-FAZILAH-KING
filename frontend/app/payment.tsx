@@ -2032,7 +2032,7 @@ export default function PaymentScreen() {
       if (match && match[1]) {
         const host = match[1];
         if (host.includes("railway") || host.includes("production")) {
-          return "https://smart-cafe.up.railway.app/customer-display";
+          return "https://al-fazilah-king-production.up.railway.app/customer-display";
 
         }
         return `http://${host}:8081/customer-display`;
